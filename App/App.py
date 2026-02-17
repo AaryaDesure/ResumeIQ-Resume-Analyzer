@@ -92,8 +92,8 @@ def course_recommender(course_list):
 
 
 # sql connector
-connection = pymysql.connect(host='localhost',user='root',password='root@MySQL4admin',db='cv')
-cursor = connection.cursor()
+#connection = pymysql.connect(host='localhost',user='root',password='root@MySQL4admin',db='cv')
+#cursor = connection.cursor()
 
 
 # inserting miscellaneous data, fetched results, prediction and recommendation into user_data table
@@ -102,8 +102,8 @@ def insert_data(sec_token,ip_add,host_name,dev_user,os_name_ver,latlong,city,sta
     insert_sql = "insert into " + DB_table_name + """
     values (0,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     rec_values = (str(sec_token),str(ip_add),host_name,dev_user,os_name_ver,str(latlong),city,state,country,act_name,act_mail,act_mob,name,email,str(res_score),timestamp,str(no_of_pages),reco_field,cand_level,skills,recommended_skills,courses,pdf_name)
-    cursor.execute(insert_sql, rec_values)
-    connection.commit()
+    #cursor.execute(insert_sql, rec_values)
+    #connection.commit()
 
 
 # inserting feedback data into user_feedback table
@@ -158,7 +158,7 @@ def run():
 
     # Create the DB
     db_sql = """CREATE DATABASE IF NOT EXISTS CV;"""
-    cursor.execute(db_sql)
+    #cursor.execute(db_sql)
 
 
     # Create table user_data and user_feedback
@@ -191,7 +191,7 @@ def run():
                     PRIMARY KEY (ID)
                     );
                 """
-    cursor.execute(table_sql)
+    #cursor.execute(table_sql)
 
 
     DBf_table_name = 'user_feedback'
@@ -205,7 +205,7 @@ def run():
                         PRIMARY KEY (ID)
                     );
                 """
-    cursor.execute(tablef_sql)
+    #cursor.execute(tablef_sql)
 
 
     ###### CODE FOR CLIENT SIDE (USER) ######
@@ -619,7 +619,7 @@ def run():
 
 
         #  Fetching Comment History
-        cursor.execute('select feed_name, comments from user_feedback')
+        #cursor.execute('select feed_name, comments from user_feedback')
         plfeed_cmt_data = cursor.fetchall()
 
         st.subheader("**User Comment's**")
@@ -673,7 +673,7 @@ def run():
             if ad_user == 'admin' and ad_password == 'admin@resume-analyzer':
                 
                 ### Fetch miscellaneous data from user_data(table) and convert it into dataframe
-                cursor.execute('''SELECT ID, ip_add, resume_score, convert(Predicted_Field using utf8), convert(User_level using utf8), city, state, country from user_data''')
+                #cursor.execute('''SELECT ID, ip_add, resume_score, convert(Predicted_Field using utf8), convert(User_level using utf8), city, state, country from user_data''')
                 datanalys = cursor.fetchall()
                 plot_data = pd.DataFrame(datanalys, columns=['Idt', 'IP_add', 'resume_score', 'Predicted_Field', 'User_Level', 'City', 'State', 'Country'])
                 
@@ -682,7 +682,7 @@ def run():
                 st.success("Welcome Deepak ! Total %d " % values + " User's Have Used Our Tool : )")                
                 
                 ### Fetch user data from user_data(table) and convert it into dataframe
-                cursor.execute('''SELECT ID, sec_token, ip_add, act_name, act_mail, act_mob, convert(Predicted_Field using utf8), Timestamp, Name, Email_ID, resume_score, Page_no, pdf_name, convert(User_level using utf8), convert(Actual_skills using utf8), convert(Recommended_skills using utf8), convert(Recommended_courses using utf8), city, state, country, latlong, os_name_ver, host_name, dev_user from user_data''')
+                #cursor.execute('''SELECT ID, sec_token, ip_add, act_name, act_mail, act_mob, convert(Predicted_Field using utf8), Timestamp, Name, Email_ID, resume_score, Page_no, pdf_name, convert(User_level using utf8), convert(Actual_skills using utf8), convert(Recommended_skills using utf8), convert(Recommended_courses using utf8), city, state, country, latlong, os_name_ver, host_name, dev_user from user_data''')
                 data = cursor.fetchall()                
 
                 st.header("**User's Data**")
@@ -698,7 +698,7 @@ def run():
                 st.markdown(get_csv_download_link(df,'User_Data.csv','Download Report'), unsafe_allow_html=True)
 
                 ### Fetch feedback data from user_feedback(table) and convert it into dataframe
-                cursor.execute('''SELECT * from user_feedback''')
+                #cursor.execute('''SELECT * from user_feedback''')
                 data = cursor.fetchall()
 
                 st.header("**User's Feedback Data**")
