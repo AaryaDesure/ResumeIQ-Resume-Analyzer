@@ -16,7 +16,7 @@ class ResumeParser(object):
         custom_regex=None
     ):
         nlp = spacy.load('en_core_web_sm')
-        custom_nlp = spacy.load(os.path.dirname(os.path.abspath(__file__)))
+        custom_nlp = nlp
         self.__skills_file = skills_file
         self.__custom_regex = custom_regex
         self.__matcher = Matcher(nlp.vocab)
@@ -36,7 +36,7 @@ class ResumeParser(object):
         self.__text_raw = utils.extract_text(self.__resume, '.' + ext)
         self.__text = ' '.join(self.__text_raw.split())
         self.__nlp = nlp(self.__text)
-        self.__custom_nlp = custom_nlp(self.__text_raw)
+        self.__custom_nlp = nlp(self.__text_raw)
         self.__noun_chunks = list(self.__nlp.noun_chunks)
         self.__get_basic_details()
 

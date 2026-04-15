@@ -14,6 +14,7 @@ joblib==1.5.2
 kiwisolver==1.4.9
 MarkupSafe==3.0.3
 matplotlib==3.10.6
+nltk==3.9.4
 numpy==2.2.6
 packaging==25.0
 pandas==2.3.3
@@ -22,6 +23,7 @@ pyparsing==3.2.5
 python-dateutil==2.9.0.post0
 pytz==2025.2
 qrcode==8.2
+regex==2026.3.32
 six==1.17.0
 stanio==0.5.1
 tqdm==4.67.1
